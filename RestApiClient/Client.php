@@ -5,7 +5,8 @@ namespace App\RestApiClient;
 use App\Interfaces\ClientInterface;
 use Exeception;
 
-class Client implements ClientInterface {
+class Client //implements ClientInterface 
+{
 
     const API_URL = 'http://localhost:8000';
     /** 
@@ -25,7 +26,7 @@ class Client implements ClientInterface {
 
     function get($route, array $query = [])
     {
-        $url = $this_>geturl() . $route;
+        $url = $this->geturl() . $route;
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($curl, CURLOPT_URL, $url);

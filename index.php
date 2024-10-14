@@ -1,7 +1,7 @@
 <?php
 include './vendor/autoload.php';
 
-use App\Html\OageCounties;
+use App\Html\PageCounties;
 use App\Html\Request;
 
 PageCounties::head();
