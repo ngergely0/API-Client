@@ -12,6 +12,8 @@ class PageCounties extends AbstractPage
         self::tableHead();
         self::tableBody($entities);
         echo "</table>";
+
+        self::editor();
     }
  
     static function tableHead()
@@ -23,13 +25,12 @@ class PageCounties extends AbstractPage
                 <th>Megnevezés</th>
                 <th style="float: right; display: flex">
                     Művelet&nbsp;
-                    <button id="btn-add" title="Új>+</button';
- 
+                    <button id="btn-add" title="Új">+</button>';
         echo'
                 </th>
             </tr>
             <tr id="editor" class="hidden">';
-            self::editor();
+            //self::editor();
             echo '
             </tr>
         </thead>';
@@ -43,7 +44,7 @@ class PageCounties extends AbstractPage
                     <input type="hidden" id="id" name="id">
                     <input type="search" id="name" name="name" placeholder="Megye" required>
                     <button type="submit" id="btn-save-county" name="btn-save-county" title="Ment"><i class ="fa fa-save"></i></button>
-                    <button type="button" id="btn-cancel-county" title="Mégse"><i class="fa fa-cancel"></i></button>
+                    <button type="button" id="btn-cancel-county" title="Mégse"><i class="fa fa-times"></i></button>
                 </form>
             </th>
            
@@ -53,6 +54,7 @@ class PageCounties extends AbstractPage
     }
  
     static function tableBody(array $entities) {
+        
         echo '<tbody>';
         $i = 0;
         foreach ($entities as $entity) {
@@ -61,19 +63,12 @@ class PageCounties extends AbstractPage
         <tr class='" . (++$i % 2 ? "odd" : "even") . "'>
             <td>{$entity['id']}</td>
             <td>{$entity['name']}</td>
-            <td class='flex float-right'>
-                <button type='button'
-                        id='btn-edit-{$entity['id']}'
-                        onclick='$onClick'
-                        title='Módosít'>
-                        <i class='fa fa-edit></i>'
+            <td class='flex'>
+                <button type='button' id='btn-edit-{$entity['id']}' onclick='$onClick' title='Módosít'>
+                        <i class='fa fa-edit'></i>
                 </button>
                 <form method='post' action=''>
-                    <button type='submit'
-                        id='btn-del-county-{$entity['id']}'
-                        name='btn-del-county'
-                        value='{$entity['id']}'
-                        title='Töröl'>
+                    <button type='submit' id='btn-del-county-{$entity['id']}' name='btn-del-county' value='{$entity['id']}' title='Töröl'>
                         <i class='fa fa-trash'></i>
                     </button>
                 </form>

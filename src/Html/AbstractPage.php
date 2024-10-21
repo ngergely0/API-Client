@@ -13,8 +13,10 @@ abstract class AbstractPage implements PageInterface
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="style.css">
             <title>REST API Ügyfél</title>
-
+            
             <!-- Script -->
             <script src="js/jquery-3.7.1.js" type="text/javascript"></script>
             <script src="js/app.js" type="text/javascript"></script>
@@ -39,7 +41,7 @@ abstract class AbstractPage implements PageInterface
     {
         echo '
         <footer>
-        Cpyright ...
+        Copyright Nagy Gergely
         </footer>
         </html>';
     }
@@ -56,18 +58,9 @@ abstract class AbstractPage implements PageInterface
     {
         echo '
         <form method="post" action="">
-            <input
-                type="search"
-                name="needle"
-                placeholder="Keres"
-            >
-            <button
-                type="submit"
-                id="btn-search"
-                name="btn-search"
-                title="Keres
-            >
-                <i class="fa fa-search></i>
+            <input type="search" name="needle" placeholder="Keres">
+            <button type="submit" id="btn-search" name="btn-search" title="Keres">
+                <i class="fa fa-search" aria-hidden="true"></i>
             </button>
         </form>
         <br>';
