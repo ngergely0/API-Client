@@ -34,7 +34,8 @@ class Request {
                 PageCounties::table(self::getCounties());
                 break;
             case isset($request['btn-save-county']);
-                $response = $client->post('counties', $request['btn-save-county']);
+                $countyName = $request['name'];
+                $response = $client->post('counties', ['name' => $countyName]);
                 PageCounties::table(self::getCounties());
                 break;
         }
