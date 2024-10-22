@@ -40,7 +40,7 @@ class Client //implements ClientInterface
         return json_decode($response, TRUE);
     }
 
-    function post($url, array $data = []) {
+    function post($url, $data) {
         $json = json_encode($data);
         $curl  = curl_init();
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
@@ -57,11 +57,11 @@ class Client //implements ClientInterface
         return json_decode($response, TRUE);
     }
 
-    function delete($url, array $data = []) {
-        $json = json_encode($data);
+    function delete($url, $id) {
+        $json = json_encode(['id' => $id]);
         $curl  = curl_init();
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
-        curl_setopt($curl, CURLOPT_URL, $this->url . $url);
+        curl_setopt($curl, CURLOPT_URL, $this->url . $url . '/' . $id);
         curl_setopt($curl, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "DELETE");
         curl_setopt($curl, CURLOPT_POSTFIELDS,  $json);
