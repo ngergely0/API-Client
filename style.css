@@ -1,9 +1,0 @@
-td.flex {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
-td.flex form {
-    margin-left: 5px;
-}
-
