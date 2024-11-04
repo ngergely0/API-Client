@@ -57,11 +57,9 @@ abstract class AbstractPage implements PageInterface
     static function searchbar()
     {
         echo '
-        <form method="post" action="">
-            <input type="search" name="needle" placeholder="Keres">
-            <button type="submit" id="btn-search" name="btn-search" title="Keres">
-                <i class="fa fa-search" aria-hidden="true"></i>
-            </button>
+        <form action="search.php" method="get">
+    <input type="text" name="keyword" />
+    <input type="submit" value="Search" />
         </form>
         <br>';
     }

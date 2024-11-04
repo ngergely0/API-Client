@@ -38,6 +38,20 @@ class Request {
                 $response = $client->post('counties', ['name' => $countyName]);
                 PageCounties::table(self::getCounties());
                 break;
+            case isset($request['btn-edit-county']):
+                $countyId = $request['btn-edit-county'];
+                $county = $client->get("counties/$countyId")['data'];
+                PageCounties::editForm($county);
+                break;
+            case isset($request['btn-update-county']):
+                $countyId = $request['id'];
+                $countyName = $request['name'];
+                $client->put("counties/$countyId", ['name' => $countyName]);
+                PageCounties::table(self::getCounties());
+                break;
+            case isset($request['btn-cancel']):
+                PageCounties::table(self::getCounties());
+                break;
         }
     }
 
