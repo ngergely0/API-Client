@@ -23,7 +23,6 @@ class Request {
     {
         $request = $_REQUEST;
         $client = new Client();
-        
         switch ($request){
             case isset($request['btn-home']):
                 break;
@@ -40,7 +39,9 @@ class Request {
                 PageCounties::table(self::getCounties());
                 break;
             case isset($request['btn-edit-county']):
-                PageCounties::table(self::getCounties());
+                $countyId = $request['btn-edit-county'];
+                $county = $client->get("counties/$countyId")['data'];
+                PageCounties::editForm($county);
                 break;
             case isset($request['btn-update-county']):
                 $countyId = $request['id'];
@@ -51,11 +52,11 @@ class Request {
             case isset($request['btn-cancel']):
                 PageCounties::table(self::getCounties());
                 break;
-            case isset($request['btn-search']):
-                $keyword = trim($request['keyword']);
-                $filteredCounties = $client->searchCounties($keyword);
-                PageCounties::table($filteredCounties);
-                break;
+            case isset($request['btn-cities']):
+                PageCities::dropdown(self::getCounties());
+                $countyId = $request['county_id'];
+                self::showCities($countyId); 
+                break; 
         }
     }
 
@@ -64,6 +65,16 @@ class Request {
     {
         $client = new Client();
         $response = $client->get('counties');
+
         return $response['data'];
+    }
+
+    private static function showCities($countyId)
+    {
+        $client = new Client();
+        $response = $client->get("counties/$countyId/cities");
+        $cities = $response['data'] ?? [];
+
+        PageCities::table($cities);
     }
 }
