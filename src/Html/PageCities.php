@@ -32,7 +32,7 @@ class PageCities extends AbstractPage
             echo "
             <tr>
                 <td>{$city['id']}</td>
-                <td>{$city['name']}</td>
+                <td>{$city['city']}</td>
             </tr>";
         }
         echo '</tbody>';
