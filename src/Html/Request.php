@@ -29,6 +29,7 @@ class Request {
             case isset($request['btn-counties']):
                 PageCounties::table(self::getCounties());
                 break;
+            //counties
             case isset($request['btn-del-county']);
                 $client->delete('counties', $request['btn-del-county']);
                 PageCounties::table(self::getCounties());
@@ -48,6 +49,38 @@ class Request {
                 $countyName = $request['name'];
                 $client->put("counties/$countyId", ['name' => $countyName]);
                 PageCounties::table(self::getCounties());
+                break;
+            case isset($request['btn-cancel']):
+                PageCounties::table(self::getCounties());
+                break;
+            case isset($request['btn-cities']):
+                PageCities::dropdown(self::getCounties());
+                $countyId = $request['county_id'];
+                self::showCities($countyId); 
+                break;
+            //cities
+            case isset($request['btn-del-city']);
+                $client->delete('cities', $request['btn-del-city']);
+                PageCities::dropdown(self::getCounties());
+                $countyId = $request['county_id'];
+                self::showCities($countyId);
+                PageCities::table(self::getCounties());
+                break;
+            case isset($request['btn-save-city']);
+                $cityName = $request['city'];
+                $client->post('cities', ['city' => $cityName]);
+                PageCities::table(self::getCounties());
+                break;
+            case isset($request['btn-edit-city']):
+                $cityId = $request['btn-edit-city'];
+                $city = $client->get("cities/$cityId")['data'];
+                PageCities::editForm($city);
+                break;
+            case isset($request['btn-update-city']):
+                $cityId = $request['id'];
+                $cityName = $request['city'];
+                $client->put("cities/$cityId", ['city' => $cityName]);
+                PageCities::table(self::getCounties());
                 break;
             case isset($request['btn-cancel']):
                 PageCounties::table(self::getCounties());
